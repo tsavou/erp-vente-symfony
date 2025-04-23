@@ -34,7 +34,7 @@ final class BonLivraisonController extends AbstractController{
             $entityManager->persist($bonLivraison);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_bon_livraison_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_bon_livraison_show', ['id' => $bonLivraison->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('bon_livraison/new.html.twig', [

@@ -19,7 +19,7 @@ class BonLivraison
     #[ORM\Column]
     private ?\DateTimeImmutable $dateLivraison = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
     private ?string $montantTotal = null;
 
     #[ORM\ManyToOne(inversedBy: 'bonLivraisons')]
@@ -66,7 +66,7 @@ class BonLivraison
         return $this->montantTotal;
     }
 
-    public function setMontantTotal(string $montantTotal): static
+    public function setMontantTotal(?string $montantTotal): static
     {
         $this->montantTotal = $montantTotal;
 
