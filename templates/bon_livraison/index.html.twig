@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BonLivraison index{% endblock %}
+
+{% block body %}
+    <h1>BonLivraison index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateLivraison</th>
+                <th>MontantTotal</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bon_livraison in bon_livraisons %}
+            <tr>
+                <td>{{ bon_livraison.id }}</td>
+                <td>{{ bon_livraison.dateLivraison ? bon_livraison.dateLivraison|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ bon_livraison.montantTotal }}</td>
+                <td>
+                    <a href="{{ path('app_bon_livraison_show', {'id': bon_livraison.id}) }}">show</a>
+                    <a href="{{ path('app_bon_livraison_edit', {'id': bon_livraison.id}) }}">edit</a>
+                    <form action="{{ path('app_bon_livraison_delete', {'id': bon_livraison.id}) }}" method="post" style="display: inline;">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ bon_livraison.id) }}">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_bon_livraison_new') }}">Create new</a>
+{% endblock %}
