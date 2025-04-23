@@ -12,6 +12,10 @@
                 <td>{{ bon_livraison.id }}</td>
             </tr>
             <tr>
+                <th>Client</th>
+                <td>{{ bon_livraison.client.name }}</td>
+            </tr>
+            <tr>
                 <th>DateLivraison</th>
                 <td>{{ bon_livraison.dateLivraison ? bon_livraison.dateLivraison|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
@@ -22,9 +26,32 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_bon_livraison_index') }}">back to list</a>
+    <table class="table">
+    <tbody>
+       <th>Produit</th>
+       <th>Quantite</th>
+       <th>PrixUnitaire</th>
+       <th>Montant</th>
+
+        {% for ligne in bon_livraison.ligneBons %}
+
+            <tr>
+                <td>{{ ligne.produit.name }}</td>
+                <td>{{ ligne.quantity }}</td>
+                <td>{{ ligne.prixUnitaire }}</td>
+                <td>{{ ligne.total }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+    <a href="{{ path('app_bon_livraison_edit', {'id': bon_livraison.id}) }}">ajouter une ligne</a>
 
     <a href="{{ path('app_bon_livraison_edit', {'id': bon_livraison.id}) }}">edit</a>
 
     {{ include('bon_livraison/_delete_form.html.twig') }}
+
+
 {% endblock %}
