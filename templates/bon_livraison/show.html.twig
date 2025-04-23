@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BonLivraison{% endblock %}
+
+{% block body %}
+    <h1>BonLivraison</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bon_livraison.id }}</td>
+            </tr>
+            <tr>
+                <th>DateLivraison</th>
+                <td>{{ bon_livraison.dateLivraison ? bon_livraison.dateLivraison|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>MontantTotal</th>
+                <td>{{ bon_livraison.montantTotal }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_bon_livraison_index') }}">back to list</a>
+
+    <a href="{{ path('app_bon_livraison_edit', {'id': bon_livraison.id}) }}">edit</a>
+
+    {{ include('bon_livraison/_delete_form.html.twig') }}
+{% endblock %}
