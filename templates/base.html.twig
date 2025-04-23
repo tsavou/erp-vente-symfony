@@ -12,6 +12,24 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+            <header>
+                <h1>ERP Vente</h1>
+                <nav>
+                    <ul>
+                        <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                        <li><a href="/">Consulter bons de livraison</a></li>
+                        <li><a href="/">Ajouter un bon</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                {% block body %}{% endblock %}
+            </main>
+
+            <footer>
+                <hr>
+                <p>ERP Vente - Projet Symfony</p>
+            </footer>
     </body>
 </html>
