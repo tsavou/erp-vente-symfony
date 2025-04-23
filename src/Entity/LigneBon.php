@@ -27,6 +27,12 @@ class LigneBon
     #[ORM\ManyToOne(inversedBy: 'ligneBons')]
     private ?Produit $produit = null;
 
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $remise = null;
+
+    #[ORM\Column(type: 'float')]
+    private float $total;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -79,4 +85,25 @@ class LigneBon
 
         return $this;
     }
+
+    public function getRemise(): ?float
+    {
+        return $this->remise;
+    }
+
+    public function setRemise(?float $remise): void
+    {
+        $this->remise = $remise;
+    }
+
+    public function getTotal(): float
+    {
+        return $this->total;
+    }
+
+    public function setTotal(float $total): void
+    {
+        $this->total = $total;
+    }
+
 }
