@@ -20,8 +20,8 @@ Projet de formation en Symfony pour la création d'un ERP. Ce projet ce concentr
 
 1. Clonez le dépôt :
     ```bash
-    git clone https://github.com/votre-utilisateur/votre-projet.git
-    cd votre-projet
+    git clone https://github.com/tsavou/erp-vente-symfony.git
+    cd erp-vente-symfony
     ```
 
 2. Installez les dépendances :
@@ -30,7 +30,8 @@ Projet de formation en Symfony pour la création d'un ERP. Ce projet ce concentr
     ```
 
 3. Configurez votre environnement :
-    - Copiez le fichier `.env` en `.env.local` et ajustez les paramètres selon votre configuration locale.
+    - Configurez la connexion à la BDD directement dans le .env
+    - OU Copiez le fichier `.env` en `.env.local` et ajustez les paramètres selon votre configuration locale.
 
 4. Créez la base de données et exécutez les migrations :
     ```bash
