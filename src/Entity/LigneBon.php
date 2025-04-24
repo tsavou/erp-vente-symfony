@@ -106,4 +106,8 @@ class LigneBon
         $this->total = $total;
     }
 
+    public function calculerTotal(): void
+        {
+            $this->total = ($this->quantity * $this->prixUnitaire) - $this->remise;
+        }
 }

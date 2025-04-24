@@ -3,9 +3,94 @@
 {% block title %}New BonLivraison{% endblock %}
 
 {% block body %}
-    <h1>Create new BonLivraison</h1>
+    <h1>Nouveau Bon de Livraison</h1>
 
-    {{ include('bon_livraison/_form.html.twig') }}
+    {{ form_start(form) }}
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Client</th>
+            <td>{{ form_row(form.client) }}</td>
+        </tr>
+        <tr>
+            <th>DateLivraison</th>
+            <td>{{ form_row(form.dateLivraison) }}</td>
+        </tr>
 
-    <a href="{{ path('app_bon_livraison_index') }}">Retour à la liste</a>
+        </tbody>
+    </table>
+
+
+    {% set prototype %}
+        <tr class="ligne-item">
+            <td>{{ form_widget(form.ligneBons.vars.prototype.produit) }}</td>
+            <td>{{ form_widget(form.ligneBons.vars.prototype.quantity) }}</td>
+            <td>{{ form_widget(form.ligneBons.vars.prototype.prixUnitaire) }}</td>
+            <td>{{ form_widget(form.ligneBons.vars.prototype.remise) }}</td>
+            <td>
+                <button type="button" class="btn btn-danger remove-ligne">X</button>
+            </td>
+        </tr>
+    {% endset %}
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Produit</th>
+            <th>Quantité</th>
+            <th>Prix Unitaire</th>
+            <th>Remise</th>
+            <th><button type="button" id="add-ligne" class="btn btn-primary">Nouvelle ligne</button></th>
+        </tr>
+        </thead>
+        <tbody id="ligneBons"
+               data-prototype="{{ prototype|e('html_attr') }}">
+        {% for ligne in form.ligneBons %}
+            <tr class="ligne-item">
+                <td>{{ form_widget(ligne.produit) }}</td>
+                <td>{{ form_widget(ligne.quantity) }}</td>
+                <td>{{ form_widget(ligne.prixUnitaire) }}</td>
+                <td>{{ form_widget(ligne.remise) }}</td>
+                <td><button type="button" class="btn btn-danger remove-ligne">X</button></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <br><br>
+
+
+    <button class="btn btn-success">Enregistrer</button>
+    {{ form_end(form) }}
+
+
+    <script>
+        document.addEventListener('turbo:load', () => {
+            const addButton = document.getElementById('add-ligne');
+            const ligneBonsContainer = document.getElementById('ligneBons');
+
+            // Récupère l'index actuel
+            let index = ligneBonsContainer.children.length;
+
+
+            addButton.addEventListener('click', () => {
+                const prototype = ligneBonsContainer.dataset.prototype;
+                const newForm = prototype.replace(/__name__/g, index);
+                const tr = document.createElement('tr');
+                tr.classList.add('ligne-item');
+                tr.innerHTML = newForm;
+
+                ligneBonsContainer.appendChild(tr);
+                index++;
+            });
+
+            ligneBonsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('remove-ligne')) {
+                    e.target.closest('tr').remove();
+                }
+            });
+        });
+    </script>
 {% endblock %}
