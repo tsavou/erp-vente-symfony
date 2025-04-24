@@ -32,6 +32,19 @@ final class BonLivraisonController extends AbstractController{
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($bonLivraison);
+
+            foreach ($bonLivraison->getLigneBons() as $ligne) {
+
+                $ligne->calculerTotal();
+
+                //reduire le stock du produit
+                $produit = $ligne->getProduit();
+                $produit->setQuantiteStock($produit->getQuantiteStock() - $ligne->getQuantity());
+
+                //calculer le total du bon de livraison
+                $bonLivraison->setMontantTotal($bonLivraison->getMontantTotal() + $ligne->getTotal());
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_bon_livraison_show', ['id' => $bonLivraison->getId()], Response::HTTP_SEE_OTHER);
@@ -58,12 +71,21 @@ final class BonLivraisonController extends AbstractController{
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $bonLivraison->setMontantTotal(0);
+
+            foreach ($bonLivraison->getLigneBons() as $ligne) {
+                $ligne->calculerTotal();
+                $bonLivraison->setMontantTotal($bonLivraison->getMontantTotal() + $ligne->getTotal());
+
+                //gerer l'update de la quantite en stock grâce au module gestion de stock
+            }
+
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_bon_livraison_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_bon_livraison_show', ['id' => $bonLivraison->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('bon_livraison/edit.html.twig', [
+        return $this->render('bon_livraison/new.html.twig', [
             'bon_livraison' => $bonLivraison,
             'form' => $form,
         ]);

@@ -29,7 +29,7 @@ class BonLivraison
     /**
      * @var Collection<int, LigneBon>
      */
-    #[ORM\OneToMany(targetEntity: LigneBon::class, mappedBy: 'bonLivraison')]
+    #[ORM\OneToMany(targetEntity: LigneBon::class, mappedBy: 'bonLivraison', cascade: ['persist'], orphanRemoval: true)]
     private Collection $ligneBons;
 
     /**
