@@ -107,7 +107,12 @@ class LigneBon
     }
 
     public function calculerTotal(): void
-        {
-            $this->total = ($this->quantity * $this->prixUnitaire) - $this->remise;
-        }
+    {
+        $this->total = ($this->quantity * $this->prixUnitaire) - $this->remise;
+    }
+
+    public function getTotalAvantRemise(): float
+    {
+        return $this->quantity * $this->prixUnitaire;
+    }
 }
