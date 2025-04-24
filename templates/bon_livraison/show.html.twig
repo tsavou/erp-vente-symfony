@@ -44,21 +44,27 @@
     <tbody>
        <th>Produit</th>
        <th>Quantite</th>
-       <th>PrixUnitaire</th>
-       <th>remise</th>
-       <th>Montant</th>
+       <th>PU produit de base </th>
+       <th>PU Vente</th>
+       <th>Remise</th>
+       <th>Total avant remise</th>
+       <th>Total</th>
 
         {% for ligne in bon_livraison.ligneBons %}
 
             <tr>
                 <td>{{ ligne.produit.name }}</td>
                 <td>{{ ligne.quantity }}</td>
+                <td>{{ ligne.produit.prixUnitaire }} €</td>
                 <td>{{ ligne.prixUnitaire }} €</td>
+                <td>{{ ligne.totalAvantRemise }} €</td>
                 <td>{{ ligne.remise }} €</td>
                 <td>{{ ligne.total }} €</td>
             </tr>
         {% endfor %}
        <tr>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
