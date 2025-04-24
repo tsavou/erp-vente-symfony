@@ -17,13 +17,13 @@ class BonLivraisonType extends AbstractType
         $builder
             ->add('dateLivraison', null, [
                 'widget' => 'single_text',
-                'label' => 'Date de livraison'
+                'label' => false
             ])
             ->add('client', EntityType::class, [
                 'class' => Client::class,
                 'choice_label' => 'name',
                 'placeholder' => 'Choisir un client',
-                'label' => 'Client',
+                'label' => false,
                 'required' => true,
             ])
             ->add('ligneBons', CollectionType::class, [

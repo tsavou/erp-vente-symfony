@@ -22,10 +22,21 @@
                 <td>{{ bon_livraison.id }}</td>
                 <td>{{ bon_livraison.client.name }}</td>
                 <td>{{ bon_livraison.dateLivraison|date('d/m/Y') }}</td>
-                <td>{{ bon_livraison.montantTotal }}</td>
-                <td>
-                    <a href="{{ path('app_bon_livraison_show', {'id': bon_livraison.id}) }}">voir</a>
-                    <a href="{{ path('app_bon_livraison_edit', {'id': bon_livraison.id}) }}">modifier</a>
+                <td>{{ bon_livraison.montantTotal }} €</td>
+                <td class="d-flex gap-2">
+                    <a href="{{ path('app_bon_livraison_show', {'id': bon_livraison.id}) }}" class="btn btn-info">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z" stroke="#09090B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="#09090B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+
+                    </a>
+                    <a href="{{ path('app_bon_livraison_edit', {'id': bon_livraison.id}) }}" class="btn btn-info">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13M18.5 2.49998C18.8978 2.10216 19.4374 1.87866 20 1.87866C20.5626 1.87866 21.1022 2.10216 21.5 2.49998C21.8978 2.89781 22.1213 3.43737 22.1213 3.99998C22.1213 4.56259 21.8978 5.10216 21.5 5.49998L12 15L8 16L9 12L18.5 2.49998Z" stroke="#09090B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+
+                    </a>
                     {{ include('bon_livraison/_delete_form.html.twig') }}
                 </td>
             </tr>
@@ -37,5 +48,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_bon_livraison_new') }}">Créer un nouveau bon de livraison</a>
+    <a href="{{ path('app_bon_livraison_new') }}" class="btn btn-primary">Nouveau bon de livraison</a>
 {% endblock %}
